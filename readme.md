@@ -1,0 +1,1 @@
+This is a sample project base on [Microservicios con ASP.NET 5, Angular, MongoDB, Docker](https://www.udemy.com/course/microservicios-aspnet-core-5-angular-mongodb). There may be some changes between the course source project and this repository, as it may be tweaked for learning purpose.
