@@ -25,6 +25,7 @@ namespace Services.api.BookStore
             services.Configure<MongoSettings>(Configuration.GetSection("MongoDb"));
 
             services.AddSingleton<MongoSettings>();
+            services.AddTransient<IMongoDb, MongoDb>();
             services.AddTransient<IAuthorContext, AuthorContext>();
             services.AddTransient<IAuthorRepository, AuthorRepository>();
 

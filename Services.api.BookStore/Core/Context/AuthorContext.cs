@@ -7,10 +7,9 @@ namespace Services.api.BookStore.Core.Context
     public class AuthorContext : IAuthorContext
     {
         private readonly IMongoDatabase _db;
-        public AuthorContext(IOptions<MongoSettings> options)
+        public AuthorContext(IMongoDb mongoDb)
         {
-            var client = new MongoClient(options.Value.ConnectionString);
-            _db = client.GetDatabase(options.Value.Database);
+            _db = mongoDb.GetDatabase();
         }
         public IMongoCollection<Author> GetCollection()
         {
