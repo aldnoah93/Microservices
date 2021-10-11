@@ -10,16 +10,41 @@ namespace Services.api.BookStore.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
-        private readonly IAuthorRepository _repository;
-        public AuthorController(IAuthorRepository repository)
+        private readonly IMongoRepository<Author> _repository;
+        public AuthorController(IMongoRepository<Author> repository)
         {
             _repository = repository;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAsync(){
-            var authors = await _repository.GetAuthorsAsync();
+            var authors = await _repository.GetAllAsync();
             return Ok(authors);
+        }
+
+        [HttpGet("/{id}")]
+        public async Task<ActionResult<IEnumerable<Author>>> GetByIdAsync(string id){
+            var authors = await _repository.GetByIdAsync(id);
+            return Ok(authors);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<Author>>> InsertAsync([FromBody]Author author){
+            await _repository.InsertAsync(author);
+            return Ok();
+        }
+
+        [HttpPut("/{id}")]
+        public async Task<ActionResult<IEnumerable<Author>>> InsertAsync(string id, [FromBody]Author author){
+            await _repository.UpdateAsync(author);
+            return Ok();
+        }
+        
+
+        [HttpDelete("/{id}")]
+        public async Task<ActionResult<IEnumerable<Author>>> DeleteById(string id){
+            await _repository.DeleteByIdAsync(id);
+            return Ok(); 
         }
     }
 }

@@ -4,11 +4,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Services.api.BookStore.Core.Entities
 {
-    public class Author
+    [BsonCollectionAtribute(collectionName:"Author")]
+    public class Author : Document
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }
         [BsonElement("lastName")]
