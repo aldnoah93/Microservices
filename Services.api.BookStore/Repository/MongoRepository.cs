@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Services.api.BookStore.Core.Context;
 using Services.api.BookStore.Core.Entities;
@@ -68,12 +69,39 @@ namespace Services.api.BookStore.Repository
                     .ToListAsync();
 
             long totalDocuments = await _collection.CountDocumentsAsync(filter);
-            int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalDocuments / pageSize)));
+            int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(totalDocuments) / Convert.ToDouble(pageSize)));
 
             pagination.PagesQuantity = totalPages;
 
             return pagination;
 
+        }
+
+        public async Task<PaginationEntity<TDocument>> PaginationByFilterAsync(PaginationEntity<TDocument> pagination)
+        {
+            var sort = pagination.SortDirection == "desc" ? 
+                Builders<TDocument>.Sort.Descending(pagination.Sort) : 
+                Builders<TDocument>.Sort.Ascending(pagination.Sort);
+            
+            var filter = pagination.FilterValue == null ? 
+                FilterDefinition<TDocument>.Empty : 
+                Builders<TDocument>.Filter.Regex(pagination.FilterValue.Property, new BsonRegularExpression($".*{pagination.FilterValue.Value}.*", "i"));
+
+            var pageSize = pagination.PageSize == 0 ? 1 : pagination.PageSize;
+            var page = pagination.Page == 0 ? 1 : pagination.Page;
+            pagination.Data = await _collection.Find(filter)
+                    .Sort(sort)
+                    .Skip((page - 1) * pageSize)
+                    .Limit(pageSize)
+                    .ToListAsync();
+
+            long totalDocuments = await _collection.CountDocumentsAsync(filter);
+            int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(totalDocuments) / Convert.ToDouble(pageSize)));
+
+            pagination.PagesQuantity = totalPages;
+            pagination.DocumentsTotal = totalDocuments;
+
+            return pagination;
         }
     }
 }

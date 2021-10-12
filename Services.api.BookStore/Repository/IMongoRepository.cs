@@ -15,5 +15,6 @@ namespace Services.api.BookStore.Repository
         Task UpdateAsync(TDocument document);
         Task DeleteByIdAsync(string id);
         Task<PaginationEntity<TDocument>> PaginationByAsync(Expression<Func<TDocument,bool>> filterExpression, PaginationEntity<TDocument> pagination);
+        Task<PaginationEntity<TDocument>> PaginationByFilterAsync(PaginationEntity<TDocument> pagination);
     }
 }

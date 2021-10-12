@@ -52,5 +52,11 @@ namespace Services.api.BookStore.Controllers
             var result = await _repository.PaginationByAsync(filter => filter.Name == pagination.Filter, pagination);
             return Ok(result);
         }
+
+        [HttpPost("paginationFiltered")]
+        public async Task<ActionResult<PaginationEntity<Author>>> PostPaginationByFilter(PaginationEntity<Author> pagination){
+            var result = await _repository.PaginationByFilterAsync(pagination);
+            return Ok(result);
+        }
     }
 }

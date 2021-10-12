@@ -12,7 +12,10 @@ namespace Services.api.BookStore.Core.Entities
         public string Sort { get; set; }
         public string SortDirection { get; set; }
         public string Filter { get; set; }
+        public FilterValue FilterValue { get; set;}
         public int PagesQuantity { get; set; }
         public IEnumerable<TDocument> Data { get; set; }
+        public long DocumentsTotal { get; set; }
     }
+
 }
