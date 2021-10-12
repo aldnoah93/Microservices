@@ -22,7 +22,7 @@ namespace Services.api.BookStore.Controllers
             return Ok(authors);
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Author>>> GetByIdAsync(string id){
             var authors = await _repository.GetByIdAsync(id);
             return Ok(authors);
@@ -34,17 +34,23 @@ namespace Services.api.BookStore.Controllers
             return Ok();
         }
 
-        [HttpPut("/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<Author>>> InsertAsync(string id, [FromBody]Author author){
             await _repository.UpdateAsync(author);
             return Ok();
         }
         
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<IEnumerable<Author>>> DeleteById(string id){
             await _repository.DeleteByIdAsync(id);
             return Ok(); 
+        }
+
+        [HttpPost("pagination")]
+        public async Task<ActionResult<PaginationEntity<Author>>> PostPagination(PaginationEntity<Author> pagination){
+            var result = await _repository.PaginationByAsync(filter => filter.Name == pagination.Filter, pagination);
+            return Ok(result);
         }
     }
 }

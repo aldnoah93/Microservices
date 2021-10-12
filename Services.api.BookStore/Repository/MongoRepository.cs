@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using Services.api.BookStore.Core.Context;
@@ -47,6 +48,31 @@ namespace Services.api.BookStore.Repository
         {
             var filter = Builders<TDocument>.Filter.Eq(doc=>doc.Id, id);
             await _collection.FindOneAndDeleteAsync(filter);
+
+        }
+
+        public async Task<PaginationEntity<TDocument>> PaginationByAsync(Expression<Func<TDocument, bool>> filterExpression, PaginationEntity<TDocument> pagination)
+        {
+            var sort = pagination.SortDirection == "desc" ? 
+                Builders<TDocument>.Sort.Descending(pagination.Sort) : 
+                Builders<TDocument>.Sort.Ascending(pagination.Sort);
+            
+            var filter = string.IsNullOrEmpty(pagination.Filter) ? FilterDefinition<TDocument>.Empty : filterExpression;
+
+            var pageSize = pagination.PageSize == 0 ? 1 : pagination.PageSize;
+            var page = pagination.Page == 0 ? 1 : pagination.Page;
+            pagination.Data = await _collection.Find(filter)
+                    .Sort(sort)
+                    .Skip((page - 1) * pageSize)
+                    .Limit(pageSize)
+                    .ToListAsync();
+
+            long totalDocuments = await _collection.CountDocumentsAsync(filter);
+            int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalDocuments / pageSize)));
+
+            pagination.PagesQuantity = totalPages;
+
+            return pagination;
 
         }
     }
