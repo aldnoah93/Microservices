@@ -7,11 +7,18 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { FormsModule } from '@angular/forms';
+import { LibrosComponent } from './libros/libros.component';
+import { LibroComponent } from './libro/libro.component';
+import { LibrosService } from './libros/libros.service';
+import { InicioComponent } from './inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    LibrosComponent,
+    LibroComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +31,7 @@ import { FormsModule } from '@angular/forms';
     }),
     FormsModule
   ],
-  providers: [],
+  providers: [LibrosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
