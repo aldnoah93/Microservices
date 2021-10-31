@@ -1,0 +1,42 @@
+<section>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    #f="ngForm"
+    (ngSubmit)="guardarUsuario(f)"
+  >
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="Su email"
+        value=""
+        ngModel
+        name="email"
+        email
+        required
+        #emailInput="ngModel"
+      />
+      <mat-error *ngIf="emailInput.hasError('required')">El email no puede estar en blanco</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">El email es invalido</mat-error>
+    </mat-form-field>
+    <mat-form-field hintLabel="El password debe tener 7 caracteres">
+      <mat-label>Constraseña</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Su contraseña"
+        value=""
+        ngModel
+        name="password"
+        required
+        #passwordInput="ngModel"
+        minlength="7"
+      />
+      <mat-error *ngIf="passwordInput.hasError('required')">La contraseña no puede estar en blanco</mat-error>
+      <mat-error *ngIf="!passwordInput.hasError('required')">La contraseña debe tener 7 o más caracteres</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Guardar</button>
+  </form>
+</section>
