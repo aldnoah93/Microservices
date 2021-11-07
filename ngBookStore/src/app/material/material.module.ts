@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 const importsExports = [
   MatButtonModule,
@@ -12,6 +14,8 @@ const importsExports = [
   FlexLayoutModule,
   MatInputModule,
   MatFormFieldModule,
+  MatSidenavModule,
+  MatToolbarModule
 ];
 
 @NgModule({
