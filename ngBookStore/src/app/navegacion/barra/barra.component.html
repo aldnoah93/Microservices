@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="onClick()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Libro Market</span>
+  <section fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayout="row" fxLayoutGap="1em" class="nav-menu">
+      <li><a routerLink="/registrar">Registrar</a></li>
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/">Home</a></li>
+    </ul>
+  </section>
+</mat-toolbar>

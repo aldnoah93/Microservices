@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { RegistrarComponent } from './seguridad/registrar/registrar.component';
 import { LoginComponent } from './seguridad/login/login.component';
+import { BarraComponent } from './navegacion/barra/barra.component';
+import { MenuListaComponent } from './navegacion/menu-lista/menu-lista.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { LoginComponent } from './seguridad/login/login.component';
     LibroComponent,
     InicioComponent,
     RegistrarComponent,
-    LoginComponent
+    LoginComponent,
+    BarraComponent,
+    MenuListaComponent
   ],
   imports: [
     BrowserModule,
