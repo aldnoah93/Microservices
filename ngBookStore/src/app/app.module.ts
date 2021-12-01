@@ -17,6 +17,7 @@ import { RegistrarComponent } from './seguridad/registrar/registrar.component';
 import { LoginComponent } from './seguridad/login/login.component';
 import { BarraComponent } from './navegacion/barra/barra.component';
 import { MenuListaComponent } from './navegacion/menu-lista/menu-lista.component';
+import { SeguridadService } from './seguridad/services/seguridad.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { MenuListaComponent } from './navegacion/menu-lista/menu-lista.component
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [LibrosService],
+  providers: [LibrosService, SeguridadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
