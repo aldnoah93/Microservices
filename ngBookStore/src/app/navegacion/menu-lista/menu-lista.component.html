@@ -1,11 +1,14 @@
 <mat-nav-list>
-  <a mat-list-item routerLink="/" (click)="onClick()">
+  <a *ngIf="estadoUsuario" mat-list-item routerLink="/" (click)="onClick()">
     <mat-icon>home</mat-icon><span>Inicio</span>
   </a>
-  <a mat-list-item routerLink="/registrar" (click)="onClick()">
+  <a *ngIf="!estadoUsuario" mat-list-item routerLink="/registrar" (click)="onClick()">
     <mat-icon>how_to_reg</mat-icon><span>Registrar</span>
   </a>
-  <a mat-list-item routerLink="/login" (click)="onClick()">
+  <a *ngIf="!estadoUsuario" mat-list-item routerLink="/login" (click)="onClick()">
     <mat-icon>login</mat-icon><span>Login</span>
+  </a>
+  <a *ngIf="estadoUsuario" mat-list-item (click)="salir()">
+    <mat-icon>eject</mat-icon><span>Salir</span>
   </a>
 </mat-nav-list>
