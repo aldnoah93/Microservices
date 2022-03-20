@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Books } from './books.model';
@@ -14,10 +15,12 @@ export class BooksComponent implements OnInit, AfterViewInit {
   desplegarColumnas: string[] = ['titulo', 'descripcion', 'autor', 'precio'];
   dataSource: MatTableDataSource<Books> = new MatTableDataSource<Books>();
   @ViewChild(MatSort) ordenamiento!: MatSort;
+  @ViewChild(MatPaginator) paginacion!: MatPaginator;
 
   constructor(private booksService: BooksService) {}
   ngAfterViewInit(): void {
     this.dataSource.sort = this.ordenamiento;
+    this.dataSource.paginator = this.paginacion;
   }
 
   ngOnInit(): void {

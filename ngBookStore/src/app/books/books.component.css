@@ -1,3 +1,10 @@
 .input-text-center {
   text-align: center;
 }
+
+.boton-agregar {
+  right: 2%;
+  bottom: 5%;
+  left: auto;
+  position: absolute;
+}

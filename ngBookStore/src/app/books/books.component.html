@@ -25,3 +25,7 @@
   <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
   <mat-row *matRowDef="let row, columns: desplegarColumnas"></mat-row>
 </mat-table>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+<button mat-fab class="boton-agregar" color="warn">
+  <mat-icon>add</mat-icon>
+</button>

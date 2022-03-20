@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from  '@angular/material/paginator'
 
 const importsExports = [
   MatButtonModule,
@@ -24,6 +25,7 @@ const importsExports = [
   MatCardModule,
   MatTableModule,
   MatSortModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({
